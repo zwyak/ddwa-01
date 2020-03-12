@@ -104,7 +104,22 @@ function VehicleEmployee(vehicle, type){
   }
 }
 
+function ajaxRequest(method, uri, cb){
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, uri, true);
+  xhr.responseType = 'json';
+  xhr.send();
+
+  xhr.onload = function() {
+    if (this.status == 200){
+      var responseObj = JSON.parse(this.response);
+      cb(responseObj);
+    }
+  };
+}
+
 function loadEmployees(employess){
+  alert(employees);
   var container = document.querySelector('#employees');
   for (var i = 0; i < employees.length; i++) {
     var tr = document.createElement('tr');
@@ -118,18 +133,4 @@ function loadEmployees(employess){
   }
 }
 
-var vemployee = new VehicleEmployee('Train', 'Undeground');
-vemployee.setName('Ivanov Andrei');
-vemployee.setBirth('1990-01-13');
-vemployee.setExperience(5);
-vemployee.setCompany('MinskTrans');
-
-var iemployee = new IndustrialEmployee('Work', true);
-iemployee.setName('Ushakova Anastasia');
-iemployee.setBirth('1994-01-13');
-iemployee.setExperience(2);
-iemployee.setCompany('MTW');
-
-var employees = [vemployee, iemployee];
-
-loadEmployees(employees);
+ajaxRequest('GET', 'http://127.0.0.1:3000/', loadEmployees);
