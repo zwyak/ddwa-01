@@ -111,23 +111,22 @@ function ajaxRequest(method, uri, cb){
   xhr.send();
 
   xhr.onload = function() {
-    if (this.status == 200){
-      var responseObj = JSON.parse(this.response);
+    if (xhr.status == 200){
+      var responseObj = JSON.parse(xhr.response);
       cb(responseObj);
     }
   };
 }
 
-function loadEmployees(employess){
-  alert(employees);
+function loadEmployees(employees){
   var container = document.querySelector('#employees');
   for (var i = 0; i < employees.length; i++) {
     var tr = document.createElement('tr');
-    tr.id = employees[i].getName();
-    tr.innerHTML = '<td>' + employees[i].getName() + '</td>'
-                 + '<td>' + employees[i].getBirth() + '</td>'
-                 + '<td>' + employees[i].getExperience() + '</td>'
-                 + '<td>' + employees[i].getCompany() + '</td>'
+    tr.id = employees[i].name;
+    tr.innerHTML = '<td>' + employees[i].name + '</td>'
+                 + '<td>' + employees[i].birth + '</td>'
+                 + '<td>' + employees[i].experience + '</td>'
+                 + '<td>' + employees[i].company + '</td>'
                  + '<td>' + "<a class='updateLink' href='#'>UPDATE</a>" + '<br>' + "<a class='deleteLink' href='#'>DELETE</a>" + '</td>'
     container.appendChild(tr);
   }
