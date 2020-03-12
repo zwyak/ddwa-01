@@ -9,6 +9,14 @@
   margin-bottom: 2em;
 }
 
+.updateLink{
+  color: #07f252;
+}
+
+.deleteLink{
+  color: #f20a48;
+}
+
 table {
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
   font-size: 14px;

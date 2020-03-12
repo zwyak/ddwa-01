@@ -113,7 +113,7 @@ function loadEmployees(employess){
                  + '<td>' + employees[i].getBirth() + '</td>'
                  + '<td>' + employees[i].getExperience() + '</td>'
                  + '<td>' + employees[i].getCompany() + '</td>'
-                 + '<td>' + "<a href='#'>UPDATE</a>" + '<br>' + "<a href='#'>DELETE</a>" + '</td>'
+                 + '<td>' + "<a class='updateLink' href='#'>UPDATE</a>" + '<br>' + "<a class='deleteLink' href='#'>DELETE</a>" + '</td>'
     container.appendChild(tr);
   }
 }
