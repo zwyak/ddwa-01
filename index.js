@@ -104,33 +104,32 @@ function VehicleEmployee(vehicle, type){
   }
 }
 
-function loadEmployees(employees){
-  var tableRef = document.getElementById('employees');
-
+function loadEmployees(employess){
+  var container = document.querySelector('#employees');
   for (var i = 0; i < employees.length; i++) {
-    var newRow   = tableRef.insertRow();
-
-    var newCellName = newRow.insertCell(0);
-    var newCellBirth = newRow.insertCell(1);
-    var newCellExperience = newRow.insertCell(2);
-    var newCellCompany = newRow.insertCell(3);
-
-    var newTextName  = document.createTextNode(employees[i].getName());
-    var newTextBirth = document.createTextNode(employees[i].getBirth());
-    var newTextExperience  = document.createTextNode(employees[i].getExperience());
-    var newTextCompany = document.createTextNode(employees[i].getCompany());
-
-    newCellName.appendChild(newTextName);
-    newCellBirth.appendChild(newTextBirth);
-    newCellExperience.appendChild(newTextExperience);
-    newCellCompany.appendChild(newTextCompany);
+    var tr = document.createElement('tr');
+    tr.id = employees[i].getName();
+    tr.innerHTML = '<td>' + employees[i].getName() + '</td>'
+                 + '<td>' + employees[i].getBirth() + '</td>'
+                 + '<td>' + employees[i].getExperience() + '</td>'
+                 + '<td>' + employees[i].getCompany() + '</td>'
+                 + '<td>' + "<a href='#'>UPDATE</a>" + '<br>' + "<a href='#'>DELETE</a>" + '</td>'
+    container.appendChild(tr);
   }
 }
 
-var employee = new VehicleEmployee('Train', 'Undeground');
-employee.setName('Ivanov Andrei');
-employee.setBirth('1990-01-13');
-employee.setExperience(5);
-employee.setCompany('MinskTrans');
+var vemployee = new VehicleEmployee('Train', 'Undeground');
+vemployee.setName('Ivanov Andrei');
+vemployee.setBirth('1990-01-13');
+vemployee.setExperience(5);
+vemployee.setCompany('MinskTrans');
 
-loadEmployees([employee]);
+var iemployee = new IndustrialEmployee('Work', true);
+iemployee.setName('Ushakova Anastasia');
+iemployee.setBirth('1994-01-13');
+iemployee.setExperience(2);
+iemployee.setCompany('MTW');
+
+var employees = [vemployee, iemployee];
+
+loadEmployees(employees);
