@@ -1,5 +1,3 @@
-'use strict;'
-
 function Employee(name, birth, sex, experience, salary, company) {
   this.name = name;
   this.birth = birth;
@@ -57,6 +55,8 @@ function Employee(name, birth, sex, experience, salary, company) {
   }
 }
 
+module.exports.Employee = Employee;
+
 function IndustrialEmployee(industry, isHarmful){
   Employee.call(this);
 
@@ -81,6 +81,8 @@ function IndustrialEmployee(industry, isHarmful){
   }
 }
 
+module.exports.IndustrialEmployee = IndustrialEmployee;
+
 function VehicleEmployee(vehicle, type){
   Employee.call(this);
 
@@ -104,33 +106,23 @@ function VehicleEmployee(vehicle, type){
   }
 }
 
-function ajaxRequest(method, uri, cb){
-  var xhr = new XMLHttpRequest();
-  xhr.open(method, uri, true);
-  xhr.responseType = 'json';
+module.exports.VehicleEmployee = VehicleEmployee;
 
-  xhr.onload = function() {
-    if (xhr.status == 200){
-      var responseObj = JSON.parse(xhr.response);
-      cb(responseObj);
-    }
-  };
+const iemployee = new IndustrialEmployee('School', true);
+iemployee.setName('Harry Newman');
+iemployee.setBirth('1990-03-14');
+iemployee.setSex('male');
+iemployee.setExperience(10);
+iemployee.setSalary(1400);
+iemployee.setCompany("College");
 
-  xhr.send();
-}
+const vemployee = new VehicleEmployee('Train', 'Undeground');
+vemployee.setName('Roxen');
+vemployee.setBirth('1996-03-14');
+vemployee.setSex('female');
+vemployee.setExperience(4);
+vemployee.setSalary(790);
+vemployee.setCompany("MT");
 
-function loadEmployees(employees){
-  var container = document.querySelector('#employees');
-  for (var i = 0; i < employees.length; i++) {
-    var tr = document.createElement('tr');
-    tr.id = employees[i].name;
-    tr.innerHTML = '<td>' + employees[i].name + '</td>'
-                 + '<td>' + employees[i].birth + '</td>'
-                 + '<td>' + employees[i].experience + '</td>'
-                 + '<td>' + employees[i].company + '</td>'
-                 + '<td>' + "<a class='updateLink' href='#'>UPDATE</a>" + '<br>' + "<a class='deleteLink' href='#'>DELETE</a>" + '</td>'
-    container.appendChild(tr);
-  }
-}
-
-ajaxRequest('GET', 'http://127.0.0.1:3000/', loadEmployees);
+const employees = [iemployee, vemployee];
+module.exports.employees = employees;

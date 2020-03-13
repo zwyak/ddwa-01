@@ -1,7 +1,7 @@
 const express = require("express");
-const fs = require('fs');
-const path = require('path');
-let employees = require('./emp.json');
+const emp = require('./employee.js');
+
+let employees = emp.employees;
 
 const app = express();
 
