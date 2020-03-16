@@ -120,20 +120,53 @@ vemployee.setExperience(4);
 vemployee.setSalary(790);
 vemployee.setCompany("MT");
 
-const employees = [iemployee, vemployee];
+var employees = [iemployee, vemployee];
 
-function loadEmployees(employees){
+function employeesLoad(employees){
   var container = document.querySelector('#employees');
   for (var i = 0; i < employees.length; i++) {
     var tr = document.createElement('tr');
     tr.id = employees[i].name;
-    tr.innerHTML = '<td>' + employees[i].name + '</td>'
-                 + '<td>' + employees[i].birth + '</td>'
-                 + '<td>' + employees[i].experience + '</td>'
-                 + '<td>' + employees[i].company + '</td>'
+    tr.onclick = function(){
+      window.open("./employee.html");
+    }
+    tr.innerHTML = '<td>' + employees[i].getName() + '</td>'
+                 + '<td>' + employees[i].getBirth() + '</td>'
+                 + '<td>' + employees[i].getExperience() + '</td>'
+                 + '<td>' + employees[i].getCompany() + '</td>'
                  + '<td>' + "<a class='updateLink' href='#'>UPDATE</a>" + '<br>' + "<a class='deleteLink' href='#'>DELETE</a>" + '</td>'
     container.appendChild(tr);
   }
 }
 
-loadEmployees(employees);
+function createDetails(employee){
+  var emptable = document.querySelector('#employee');
+  var tbody = emptable.querySelector('tbody');
+
+  tbody.innerHTML += "<tr><td>Name</td><td>" + employee.getName() + "</td></tr>"
+  tbody.innerHTML += "<tr><td>Birth</td><td>" + employee.getBirth() + "</td></tr>"
+  tbody.innerHTML += "<tr><td>Sex</td><td>" + employee.getSex() + "</td></tr>"
+  tbody.innerHTML += "<tr><td>Experience</td><td>" + employee.getExperience() + "</td></tr>"
+  tbody.innerHTML += "<tr><td>Salary</td><td>" + employee.getSalary() + "</td></tr>"
+  tbody.innerHTML += "<tr><td>Company</td><td>" + employee.getCompany() + "</td></tr>"
+
+  if (employee instanceof IndustrialEmployee){
+    tbody.innerHTML += "<tr><td>Indusrty</td><td>" + employee.getIndustry() + "</td></tr>"
+    tbody.innerHTML += "<tr><td>isHarmful</td><td>" + employee.getIsHarmful() + "</td></tr>"
+  }else if (employee instanceof VehicleEmployee){
+    tbody.innerHTML += "<tr><td>Vehicle</td><td>" + employee.getVehicle() + "</td></tr>"
+    tbody.innerHTML += "<tr><td>Type</td><td>" + employee.getType() + "</td></tr>"
+  }
+}
+
+function employeeSearch(name){
+  var res = {};
+  for (var i = 0; i < employees.length; i++) {
+    if (employees[i].name === name){
+      res = employees[i];
+      break;
+    }
+  }
+
+  if (res) createDetails(res);
+}
