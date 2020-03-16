@@ -1,7 +1,0 @@
-{
-  "name": "ddwa-1-server",
-  "author": "Vlad Senyuk",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
-}

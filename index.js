@@ -104,20 +104,23 @@ function VehicleEmployee(vehicle, type){
   }
 }
 
-function ajaxRequest(method, uri, cb){
-  var xhr = new XMLHttpRequest();
-  xhr.open(method, uri, true);
-  xhr.responseType = 'json';
+var iemployee = new IndustrialEmployee('School', true);
+iemployee.setName('Harry Newman');
+iemployee.setBirth('1990-03-14');
+iemployee.setSex('male');
+iemployee.setExperience(10);
+iemployee.setSalary(1400);
+iemployee.setCompany("College");
 
-  xhr.onload = function() {
-    if (xhr.status == 200){
-      var responseObj = JSON.parse(xhr.response);
-      cb(responseObj);
-    }
-  };
+var vemployee = new VehicleEmployee('Train', 'Undeground');
+vemployee.setName('Roxen');
+vemployee.setBirth('1996-03-14');
+vemployee.setSex('female');
+vemployee.setExperience(4);
+vemployee.setSalary(790);
+vemployee.setCompany("MT");
 
-  xhr.send();
-}
+const employees = [iemployee, vemployee];
 
 function loadEmployees(employees){
   var container = document.querySelector('#employees');
@@ -133,4 +136,4 @@ function loadEmployees(employees){
   }
 }
 
-ajaxRequest('GET', 'http://127.0.0.1:3000/', loadEmployees);
+loadEmployees(employees);
