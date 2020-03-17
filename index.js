@@ -122,21 +122,27 @@ vemployee.setCompany("MT");
 
 var employees = [iemployee, vemployee];
 
-function employeesLoad(employees){
+function employeesLoad(){
   var container = document.querySelector('#employees');
   for (var i = 0; i < employees.length; i++) {
     var tr = document.createElement('tr');
     tr.id = employees[i].name;
     tr.onclick = function(){
+      sessionStorage.setItem("name", this.id);
       window.open("./employee.html");
     }
     tr.innerHTML = '<td>' + employees[i].getName() + '</td>'
                  + '<td>' + employees[i].getBirth() + '</td>'
                  + '<td>' + employees[i].getExperience() + '</td>'
                  + '<td>' + employees[i].getCompany() + '</td>'
-                 + '<td>' + "<a class='updateLink' href='#'>UPDATE</a>" + '<br>' + "<a class='deleteLink' href='#'>DELETE</a>" + '</td>'
+                 + '<td>' + "<button onlick='alert('ty')'><a class='updateLink' href='#'>UPDATE</a></button>" + '<br>' + "<button><a class='deleteLink' href='#'>DELETE</a></button>" + '</td>'
     container.appendChild(tr);
   }
+}
+
+function rowClick(){
+  sessionStorage.setItem("name", this.id);
+  window.open("./employee.html");
 }
 
 function createDetails(employee){
@@ -162,11 +168,20 @@ function createDetails(employee){
 function employeeSearch(name){
   var res = {};
   for (var i = 0; i < employees.length; i++) {
-    if (employees[i].name === name){
+    if (employees[i].name == name){
       res = employees[i];
       break;
     }
   }
 
   if (res) createDetails(res);
+}
+
+function employeeDelete(name){
+  for (var i = 0; i < employees.length; i++) {
+    if (employees[i].name == name){
+      employees.splice(i, 1);
+      break;
+    }
+  }
 }

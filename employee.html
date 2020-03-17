@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
+    <h2>Employee</h2>
     <table id="employee">
       <thead id="employeeHeader">
         <td>Property</td>
@@ -17,5 +18,8 @@
       </tbody>
     </table>
     <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript">
+      employeeSearch(sessionStorage.getItem('name'));
+    </script>
   </body>
 </html>
